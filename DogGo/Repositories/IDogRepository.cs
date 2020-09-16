@@ -1,4 +1,5 @@
 ﻿using DogGo.Models;
+using Microsoft.JSInterop.Infrastructure;
 using System.Collections.Generic;
 
 namespace DogGo.Repositories
@@ -7,5 +8,8 @@ namespace DogGo.Repositories
     {
         List<Dog> GetAllDogs();
         Dog GetDogById(int id);
+        void AddDog(Dog dog);
+        void UpdateDog(Dog dog);
+        void DeleteDog(int dogId);
     }
 }
