@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DogGo.Controllers
 {
-    public class WalkersController : Controller
+    public class WalkerController : Controller
     {
         // Private field to hold the repository
         private readonly IWalkerRepository _walkerRepo;
 
         // Constructor to assign the repository
-        public WalkersController(IWalkerRepository walkerRepository)
+        public WalkerController(IWalkerRepository walkerRepository)
         {
             _walkerRepo = walkerRepository;
         }
