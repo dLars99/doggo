@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DogGo.Controllers
 {
-    public class OwnersController : Controller
+    public class OwnerController : Controller
     {
         private readonly IOwnerRepository _ownerRepo;
 
-        public OwnersController(IOwnerRepository ownerRepository)
+        public OwnerController(IOwnerRepository ownerRepository)
         {
             _ownerRepo = ownerRepository;
         }
@@ -81,7 +81,7 @@ namespace DogGo.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View(owner);
             }
