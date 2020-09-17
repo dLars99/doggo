@@ -40,7 +40,8 @@ namespace DogGo.Repositories
                     FROM Walks w
                     LEFT JOIN Dog d ON d.Id = w.DogId
                     LEFT JOIN Owner o on o.Id= d.OwnerId
-                    WHERE WalkerId = @walkerId            ";
+                    WHERE WalkerId = @walkerId
+                    ORDER BY o.[Name]";
 
                     cmd.Parameters.AddWithValue("@walkerId", walkerId);
 
