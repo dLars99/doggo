@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DogGo.Models;
+using DogGo.Models.ViewModels;
 using DogGo.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,12 @@ namespace DogGo.Controllers
     public class DogController : Controller
     {
         private readonly IDogRepository _dogRepo;
+        private readonly IOwnerRepository _ownerRepo;
 
-        public DogController(IDogRepository dogRepository)
+        public DogController(IDogRepository dogRepository, IOwnerRepository ownerRepository)
         {
             _dogRepo = dogRepository;
+            _ownerRepo = ownerRepository;
         }
 
         // GET: DogController
@@ -36,7 +39,12 @@ namespace DogGo.Controllers
         // GET: DogController/Create
         public ActionResult Create()
         {
-            return View();
+            DogFormModel dfm = new DogFormModel()
+            {
+                Dog = new Dog(),
+                Owners = _ownerRepo.GetAllOwners()
+            };
+            return View(dfm);
         }
 
         // POST: DogController/Create
@@ -51,7 +59,12 @@ namespace DogGo.Controllers
             }
             catch
             {
-                return View(dog);
+                DogFormModel dfm = new DogFormModel()
+                {
+                    Dog = dog,
+                    Owners = _ownerRepo.GetAllOwners()
+                };
+                return View(dfm);
             }
         }
 
@@ -64,7 +77,12 @@ namespace DogGo.Controllers
                 return NotFound();
             }
 
-            return View(dog);
+            DogFormModel dfm = new DogFormModel()
+            {
+                Dog = dog,
+                Owners = _ownerRepo.GetAllOwners()
+            };
+            return View(dfm);
         }
 
         // POST: DogController/Edit/5
@@ -79,7 +97,12 @@ namespace DogGo.Controllers
             }
             catch
             {
-                return View(dog);
+                DogFormModel dfm = new DogFormModel()
+                {
+                    Dog = dog,
+                    Owners = _ownerRepo.GetAllOwners()
+                };
+                return View(dfm);
             }
         }
 

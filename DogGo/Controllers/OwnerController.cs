@@ -79,7 +79,13 @@ namespace DogGo.Controllers
             }
             catch (Exception)
             {
-                return View(owner);
+                OwnerFormViewModel vm = new OwnerFormViewModel()
+                {
+                    Owner = owner,
+                    Neighborhoods = _neighborhoodRepo.GetAll()
+                };
+
+                return View(vm);
             }
         }
 
@@ -116,7 +122,13 @@ namespace DogGo.Controllers
             }
             catch (Exception)
             {
-                return View(owner);
+                OwnerFormViewModel vm = new OwnerFormViewModel()
+                {
+                    Owner = owner,
+                    Neighborhoods = _neighborhoodRepo.GetAll()
+                };
+
+                return View(vm);
             }
         }
         
