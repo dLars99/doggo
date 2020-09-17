@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DogGo.Models;
+using DogGo.Models.ViewModels;
 using DogGo.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,13 @@ namespace DogGo.Controllers
     {
         // Private field to hold the repository
         private readonly IWalkerRepository _walkerRepo;
+        private readonly IWalksRepository _walksRepo;
 
         // Constructor to assign the repository
-        public WalkerController(IWalkerRepository walkerRepository)
+        public WalkerController(IWalkerRepository walkerRepository, IWalksRepository walksRepository)
         {
             _walkerRepo = walkerRepository;
+            _walksRepo = walksRepository;
         }
 
         // GET: Walkers
@@ -35,7 +38,14 @@ namespace DogGo.Controllers
                 return NotFound();
             }
 
-            return View(walker);
+            List<Walks> walks = _walksRepo.GetWalksByWalkerId(id);
+            WalkerProfileModel vm = new WalkerProfileModel()
+            {
+                Walker = walker,
+                Walks = walks
+            };
+
+            return View(vm);
         }
 
         // GET: WalkersController/Create
