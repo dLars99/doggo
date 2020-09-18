@@ -1,0 +1,63 @@
+﻿@model DogGo.Models.ViewModels.WalksFormModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Walks</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Walks.Date" class="control-label"></label>
+                <input asp-for="Walks.Date" type="date" class="form-control" />
+                <span asp-validation-for="Walks.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Walks.Duration" class="control-label"></label>
+                <input asp-for="Walks.Duration" class="form-control" />
+                <span asp-validation-for="Walks.Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Walks.WalkerId" class="control-label"></label>
+                <select asp-for="Walks.WalkerId" class="form-control">
+                    <option value="">Select an Owner</option>
+                    @foreach (Owner owner in Model.Owners)
+                    {
+                        <option value="@owner.Id">@owner.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Walks.WalkerId" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Walks.DogId" class="control-label"></label>
+                <select asp-for="Walks.DogId" class="form-control" multiple>
+                    <option value="">Select One or More Dogs</option>
+                    @foreach(Dog dog in Model.Dogs)
+                    {
+                        <option value="@dog.Id">@dog.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Walks.DogId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                @Html.ListBoxFor(x => x.SelectedDogs, Model.Items)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
