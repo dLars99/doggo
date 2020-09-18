@@ -39,7 +39,7 @@ namespace DogGo.Repositories
 	                    d.OwnerId, o.[Name] AS OwnerName, o.Email, o.Address, o.NeighborhoodId, o.Phone
                     FROM Walks w
                     LEFT JOIN Dog d ON d.Id = w.DogId
-                    LEFT JOIN Owner o on o.Id= d.OwnerId
+                    LEFT JOIN Owner o on o.Id = d.OwnerId
                     WHERE WalkerId = @walkerId
                     ORDER BY o.[Name]";
 
