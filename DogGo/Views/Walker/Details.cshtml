@@ -7,15 +7,33 @@
     <h1 class="mb-4">Walker Profile</h1>
 
     <section class="container">
-        <img style="width:100px;float:left;margin-right:20px"
-             src="@Model.Walker.ImageUrl" alt="Walker @Model.Walker.Id" />
-        <div>
-            <label class="font-weight-bold">Name:</label>
-            <span>@Model.Walker.Name</span>
-        </div>
-        <div>
-            <label class="font-weight-bold">Neighborhood:</label>
-            <span>@Model.Walker.Neighborhood.Name</span>
+        <div class="row">
+            <div class="col-1">
+                 <img style="width:100px;float:left;margin-right:20px"
+                 src="@Model.Walker.ImageUrl" alt="Walker @Model.Walker.Id" />
+            </div>
+            <div class="col-3 align-self-center">
+                <div class="row my-0 py-0">
+                    <section class="col-sm text-right">
+                        <label><small>Name:</small></label>
+                    </section>
+                    <section class="col-sm text-left">
+                        <small>@Model.Walker.Name</small>
+                    </section>
+                </div>
+                <div class="row my-0 py-0">
+                    <section class="col-sm text-right">
+                        <label"><small>Neighborhood:</small></label>
+                    </section>
+                    <section class="col-sm text-left">
+                        <small>@Model.Walker.Neighborhood.Name</small>
+                    </section>
+                </div>
+            </div>
+            <div class="col-1 align-self-end">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Walker.Id })
+            </div>
+            <div class="col-8"></div>
         </div>
     </section>
 
@@ -23,21 +41,21 @@
     <div class="clearfix"></div>
 
     <div class="row">
-        <section class="col-8 container mt-5">
+        <section class="col-8 container mt-5 .bg-white">
             <h1 class="text-left">Recent Walks</h1>
 
             <div class="row">
                 <table class="table">
                     <thead>
-                        <tr>
+                        <tr class="text-black-50 ">
                             <th>
-                                Date
+                                <small>Date</small>
                             </th>
                             <th>
-                                Client
+                                <small>Client</small>
                             </th>
                             <th>
-                                Duration
+                                <small>Duration</small>
                             </th>
                             <th></th>
                         </tr>
@@ -64,16 +82,11 @@
             </div>
         </section>
 
-        <section class="col-lg-4 col-md-8 container mt-5">
+        <section class="col-lg-4 col-md-8 container mt-5 .bg-secondary">
             @{ int walkHours = Model.Walks.Sum(walk => walk.Duration) / 3600; }
             @{ int walkMinutes = Model.Walks.Sum(walk => walk.Duration) % 3600 / 60; }
-            <h3>Total Walk Time: @(walkHours)hr @(walkMinutes)min </h3>
+            <h3 class="text-muted">Total Walk Time: <span class="text-dark">@(walkHours)hr @(walkMinutes)min</span> </h3>
         </section>
 
     </div>
-</div>
-
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Walker.Id }) |
-    <a asp-action="Index">Back to List</a>
 </div>
