@@ -6,7 +6,18 @@ namespace DogGo.Models
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public int Duration { get; set; }
+        private int _duration;
+        public int Duration
+        {
+            get
+            {
+                return _duration;
+            }
+            set
+            {
+                _duration = value * 60;
+            }
+        }
         public int WalkerId { get; set; }
         public Walker Walker { get; set; }
         public int DogId { get; set; }
