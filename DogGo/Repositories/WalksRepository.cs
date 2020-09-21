@@ -113,6 +113,24 @@ namespace DogGo.Repositories
                 }
             }
         }
+        public void DeleteWalks(int walksId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
 
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM Walks
+                            WHERE Id = @id
+                        ";
+
+                    cmd.Parameters.AddWithValue("@id", walksId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
