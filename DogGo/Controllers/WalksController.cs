@@ -73,7 +73,7 @@ namespace DogGo.Controllers
                     res.Walks.DogId = id;
                     _walksRepo.AddWalks(res.Walks);
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Walker");
             }
             catch
             {
