@@ -44,15 +44,15 @@ namespace DogGo.Controllers
         }
 
         // GET: WalksController/Create
-        public ActionResult Create()
+        public ActionResult Create(int neighborhoodId)
         {
-            List<Dog> Dogs = _dogRepo.GetAllDogs();
+            List<Dog> allDogs = _dogRepo.GetDogsInNeighborhood(neighborhoodId);
 
             WalksFormModel wfm = new WalksFormModel()
             {
                 Walks = new Walks(),
-                Owners = _ownerRepo.GetAllOwners(),
-                Items = Dogs.Select(x => new SelectListItem
+                Owners = _ownerRepo.GetOwnersInNeighborhood(neighborhoodId),
+                Dogs = allDogs.Select(x => new SelectListItem
                 {
                     Value = x.Id.ToString(),
                     Text = x.Name
@@ -82,7 +82,7 @@ namespace DogGo.Controllers
                 {
                 Walks = res.Walks,
                     Owners = _ownerRepo.GetAllOwners(),
-                    Items = Dogs.Select(x => new SelectListItem
+                    Dogs = Dogs.Select(x => new SelectListItem
                     {
                         Value = x.Id.ToString(),
                         Text = x.Name

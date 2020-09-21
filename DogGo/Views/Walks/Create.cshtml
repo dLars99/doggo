@@ -23,8 +23,8 @@
                 <span asp-validation-for="Walks.Duration" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Walks.WalkerId" class="control-label"></label>
-                <select asp-for="Walks.WalkerId" class="form-control">
+                <label asp-for="Owners" class="control-label"></label>
+                <select asp-for="Owners" class="form-control">
                     <option value="">Select an Owner</option>
                     @foreach (Owner owner in Model.Owners)
                     {
@@ -33,19 +33,8 @@
                 </select>
                 <span asp-validation-for="Walks.WalkerId" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="Walks.DogId" class="control-label"></label>
-                <select asp-for="Walks.DogId" class="form-control" multiple>
-                    <option value="">Select One or More Dogs</option>
-                    @foreach(Dog dog in Model.Dogs)
-                    {
-                        <option value="@dog.Id">@dog.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="Walks.DogId" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
-                @Html.ListBoxFor(x => x.SelectedDogs, Model.Items)
+                @Html.ListBoxFor(x => x.SelectedDogs, Model.Dogs)
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -55,7 +44,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a href="@Url.Action("Index", "Walker")">Back to List</a>
 </div>
 
 @section Scripts {

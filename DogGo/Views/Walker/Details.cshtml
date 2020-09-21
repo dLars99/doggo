@@ -23,7 +23,7 @@
                 </div>
                 <div class="row my-0 py-0">
                     <section class="col-sm text-right">
-                        <label"><small>Neighborhood:</small></label>
+                        <label><small>Neighborhood:</small></label>
                     </section>
                     <section class="col-sm text-left">
                         <small>@Model.Walker.Neighborhood.Name</small>
@@ -72,7 +72,7 @@
                                     @{ string dateString = item.Date.ToString("d"); }
                                     @Html.DisplayFor(modelItem => dateString)
                                 </td>
-                                <td>                             
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Dog.Owner.Name)
                                 </td>
                                 <td>
@@ -80,8 +80,9 @@
                                     @Html.DisplayFor(modelItem => durationTime) min
                                 </td>
                             </tr>
-                                        }
+                        }
                 </table>
+                @Html.ActionLink("Add more walks", "Create", "Walks", new { neighborhoodId = Model.Walker.NeighborhoodId })
             </div>
         </section>
 
