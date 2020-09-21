@@ -82,7 +82,8 @@
                             </tr>
                         }
                 </table>
-                @Html.ActionLink("Add more walks", "Create", "Walks", new { neighborhoodId = Model.Walker.NeighborhoodId })
+                @Html.ActionLink("Add more walks", "Create", "Walks", new { neighborhoodId = Model.Walker.NeighborhoodId }) ||
+                @Html.ActionLink("Delete walks", "Delete", "Walks", new { walkerId = Model.Walker.Id })
             </div>
         </section>
 

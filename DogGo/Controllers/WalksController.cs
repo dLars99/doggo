@@ -77,10 +77,10 @@ namespace DogGo.Controllers
             }
             catch
             {
-                List < Dog > Dogs = _dogRepo.GetAllDogs();
+                List<Dog> Dogs = _dogRepo.GetAllDogs();
                 WalksFormModel wfm = new WalksFormModel()
                 {
-                Walks = res.Walks,
+                    Walks = res.Walks,
                     Owners = _ownerRepo.GetAllOwners(),
                     Dogs = Dogs.Select(x => new SelectListItem
                     {
@@ -114,23 +114,39 @@ namespace DogGo.Controllers
         }
 
         // GET: WalksController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int walkerId)
         {
-            return View();
+            List<Walks> walks = _walksRepo.GetWalksByWalkerId(walkerId);
+            WalksDeleteModel wdm = new WalksDeleteModel()
+            {
+                Walks = walks.Select(w => new SelectListItem
+                {
+                    Value = w.Id.ToString(),
+                    Text = $"{w.Date} {w.Dog.Name} {w.Duration / 60}"
+                })
+            };
+
+            return View(wdm);
         }
 
         // POST: WalksController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(WalksDeleteModel res)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                int idToDelete;
+                foreach (int id in res.SelectedWalks)
+                {
+                    idToDelete = id;
+                    _walksRepo.DeleteWalks(idToDelete);
+                }
+                return RedirectToAction("Index", "Walker");
             }
             catch
             {
-                return View();
+                return View(res);
             }
         }
     }
