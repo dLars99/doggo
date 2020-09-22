@@ -192,5 +192,11 @@ namespace DogGo.Controllers
 
             return RedirectToAction("Index", "Dog");
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
